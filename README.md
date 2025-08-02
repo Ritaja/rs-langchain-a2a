@@ -1,5 +1,9 @@
 # Insurance Analyst Agent
 
+[![LangChain](https://img.shields.io/badge/langchain-00B9FF?style=flat&logo=langchain&logoColor=white)](https://github.com/hwchase17/langchain) [![DuckDB](https://img.shields.io/badge/DuckDB-FFD93D?style=flat&logo=duckdb&logoColor=black)](https://duckdb.org/) [![Azure OpenAI](https://img.shields.io/badge/Azure%20OpenAI-0078D4?style=flat&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/services/openai/) [![Langfuse](https://img.shields.io/badge/langfuse-292929?style=flat&logo=langfuse&logoColor=white)](https://langfuse.com/)
+
+This repository showcases A2A agents using the OSS tools mentioned above.
+
 An intelligent insurance analytics tool built with LangChain, DuckDB, and Azure OpenAI, featuring observability with Langfuse and A2A protocol support.
 
 ## Features
