@@ -6,6 +6,22 @@ This repository showcases A2A agents using the OSS tools mentioned above.
 
 An intelligent insurance analytics tool built with LangChain, DuckDB, and Azure OpenAI, featuring observability with Langfuse and A2A protocol support.
 
+## Table of Contents
+
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Setup](#setup)
+- [Usage](#usage)
+  - [Interactive Agent](#interactive-agent)
+  - [Demo Mode](#demo-mode)
+  - [A2A Server & Client](#a2a-server--client)
+- [Custom Tools](#custom-tools)
+- [Configuration](#configuration)
+- [Development](#development)
+- [License](#license)
+
 ## Features
 
 - Generate synthetic insurance data (customers, policies, claims) using `faker` and `duckdb`.
@@ -13,6 +29,82 @@ An intelligent insurance analytics tool built with LangChain, DuckDB, and Azure 
 - Demo mode for running predefined analytics queries.
 - A2A-compatible server exposing the agent via HTTP and a corresponding client for integration.
 - Observability and tracing through Langfuse.
+
+## Screenshots
+
+### Langfuse Cost Dashboard
+![Langfuse Cost Dashboard](images/langfuse-cost-dasboard.jpeg)
+*Comprehensive cost tracking and monitoring dashboard showing LLM usage metrics and expenses.*
+
+### Langfuse GenAI Trace
+![Langfuse GenAI Trace](images/langfuse-genai-trace.jpeg)
+*Detailed trace visualization of the GenAI workflow showing request flow and performance metrics.*
+
+## Architecture
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        CLI[CLI Interface]
+        A2A_CLIENT[A2A Client]
+        WEB[Web Interface]
+    end
+    
+    subgraph "Application Layer"
+        AGENT[Insurance Analyst Agent]
+        A2A_SERVER[A2A Server]
+        TOOLS[Custom Tools]
+    end
+    
+    subgraph "AI/ML Layer"
+        LANGCHAIN[LangChain Framework]
+        AZURE_OPENAI[Azure OpenAI]
+        LLM[Language Model]
+    end
+    
+    subgraph "Data Layer"
+        DUCKDB[DuckDB Database]
+        SYNTHETIC[Synthetic Data Generator]
+    end
+    
+    subgraph "Observability"
+        LANGFUSE[Langfuse]
+        POSTGRES[PostgreSQL]
+        CLICKHOUSE[ClickHouse]
+    end
+    
+    CLI --> AGENT
+    A2A_CLIENT --> A2A_SERVER
+    WEB --> A2A_SERVER
+    
+    AGENT --> LANGCHAIN
+    A2A_SERVER --> AGENT
+    AGENT --> TOOLS
+    
+    LANGCHAIN --> AZURE_OPENAI
+    AZURE_OPENAI --> LLM
+    
+    TOOLS --> DUCKDB
+    SYNTHETIC --> DUCKDB
+    
+    LANGCHAIN --> LANGFUSE
+    LANGFUSE --> POSTGRES
+    LANGFUSE --> CLICKHOUSE
+    
+    style AGENT fill:#e1f5fe
+    style LANGCHAIN fill:#f3e5f5
+    style AZURE_OPENAI fill:#e8f5e8
+    style DUCKDB fill:#fff3e0
+    style LANGFUSE fill:#fce4ec
+```
+
+The architecture consists of multiple layers:
+
+- **Client Layer**: Multiple interfaces including CLI, A2A client, and potential web interfaces
+- **Application Layer**: Core insurance analyst agent with A2A protocol support and custom analytics tools
+- **AI/ML Layer**: LangChain framework integrated with Azure OpenAI for intelligent query processing
+- **Data Layer**: DuckDB for fast analytics on synthetic insurance data
+- **Observability**: Langfuse for comprehensive tracing and monitoring with PostgreSQL and ClickHouse backends
 
 ## Prerequisites
 
